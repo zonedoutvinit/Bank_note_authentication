@@ -1,3 +1,4 @@
+#importing modules
 from flask import Flask,request
 import pandas as pd
 import numpy as np
@@ -5,13 +6,15 @@ import pickle
 import flasgger
 from flasgger import Swagger
 
+#setting start point for application 
 app = Flask(__name__)
 Swagger(app)
 
+#loading the model
 pickle_in = open("../Bank_note_aunthetication/Model/Model.pkl", 'rb')
 Model = pickle.load(pickle_in)
 
-
+#adding Decorators i.e '@' before each function for flask
 @app.route('/')
 def welcome():
     return "Welcome All"
@@ -48,7 +51,7 @@ def predict():
     skewness = request.args.get('skewness')
     curtosis = request.args.get('curtosis')
     entropy = request.args.get('entropy')
-    prediction = Model.predict([[variance, skewness, curtosis, entropy]])
+    prediction = Model.predict([[variance, skewness, curtosis, entropy]]) #prediction function in use
     print(prediction)
     return "the predicted value is :"+ str(prediction)
 
@@ -70,7 +73,7 @@ def predict_file():
     """
     df_test = pd.read_csv(request.files.get("file"))
     print(df_test.head())
-    prediction = Model.predict(df_test)
+    prediction = Model.predict(df_test) #prediction for a small csv file. 
     return "the predicted value from csv are :"+ str(list(prediction))
 
 

@@ -13,8 +13,9 @@ model = pickle.load(pickle_in)
 def welcome():
     return "Welcome All"
 
+#function for predicting using the model
 def predict_note(variance, skewness, curtosis, entropy):
-    prediction = model.predict([[variance, skewness, curtosis, entropy]])
+    prediction = model.predict([[variance, skewness, curtosis, entropy]]) #prediction function in use
     print(prediction)
     return prediction
 
