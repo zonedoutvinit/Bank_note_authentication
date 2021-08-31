@@ -1,11 +1,14 @@
+#importing modules 
 import numpy as np
 import pickle 
 import pandas as pd
 import streamlit as st
 from PIL import Image
- 
+
+#importing created model and storing in a variable
 pickle_in = open("../Model/Model.pkl", 'rb')
 model = pickle.load(pickle_in)
+
 
 def welcome():
     return "Welcome All"
@@ -17,6 +20,7 @@ def predict_note(variance, skewness, curtosis, entropy):
 
 def main():
     st.title("Bank Authenticator")
+    #Html code for simple design tasks 
     html_temp =  """
     <div style="background-color:tomato;padding:10px">
     <h2 style="color:white;text-align:center;">Streamlit Bank Authenticator ML App </h2>
